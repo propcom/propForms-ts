@@ -14,7 +14,7 @@
         "test": "jest"
     },
     "files": ["dist"],
-    "repository": "https://github.com/propcom/propForms",
+    "repository": "https://github.com/propcom/propForms-ts",
     "author": "Samuel Woodbridge",
     "license": "MIT",
     "private": false,
