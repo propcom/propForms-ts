@@ -6,4 +6,4 @@ const config =
         : new DevConfig();
 
 // Config Builder
-module.exports = config.build();
+module.exports = config.package("PropForms").build();

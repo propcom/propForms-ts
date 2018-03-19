@@ -11,15 +11,19 @@ const path = require("path");
 class Config {
     constructor() {
         this.mHost = "0.0.0.0";
-        this.mEntry = {
-            app: path.join(process.cwd(), "src/app.ts")
-        };
+        this.mPackage = "package";
         this.mDist = "public";
     }
 
-    dist(dist) {
-        this.mDist = dist;
+    package(name) {
+        this.mPackage = name;
         return this;
+    }
+
+    getEntry() {
+        return {
+            app: path.join(process.cwd(), "src/app.ts")
+        };
     }
 
     getOutput() {
@@ -76,7 +80,7 @@ class Config {
 
     build() {
         return {
-            entry: this.mEntry,
+            entry: this.getEntry(),
             devServer: this.getDevServer(),
             mode: "development",
             output: this.getOutput(),

@@ -11,10 +11,13 @@ const path = require("path");
 class ProductionConfig extends Config {
     constructor() {
         super();
-        this.mEntry = {
-            propForms: path.join(process.cwd(), "src/PropForms.ts")
-        };
         this.mDist = "dist";
+    }
+
+    getEntry() {
+        return {
+            [this.mPackage]: path.join(process.cwd(), `src/${this.mPackage}.ts`)
+        };
     }
 
     getRules() {

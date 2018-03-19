@@ -2,8 +2,8 @@
     "name": "propforms",
     "version": "3.0.0",
     "description": "PropForms, rebuilt in Typescript",
-    "main": "dist/propForms.js",
-    "types": "dist/propForms.d.ts",
+    "main": "dist/PropForms.js",
+    "types": "dist/PropForms.d.ts",
     "scripts": {
         "prepublish":
             "jest && NODE_ENV=production webpack --display-error-details -p --progress --colors",
