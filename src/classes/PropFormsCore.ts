@@ -7,8 +7,12 @@ export default class PropFormsCore {
     private options: PropFormsOptions;
     private requiredFields: HTMLElement[];
     private validator: PropFormsValidation;
-
     public isDisabled: boolean = false;
+
+    private submitEvent = (e: Event) => {
+        e.preventDefault();
+        this.submit();
+    };
 
     constructor(form: HTMLFormElement, options: PropFormsOptions) {
         this.options = options;
@@ -18,6 +22,8 @@ export default class PropFormsCore {
             this.form,
             this.requiredFields
         );
+
+        this.bindSubmit();
     }
 
     public validate(): boolean {
@@ -30,6 +36,18 @@ export default class PropFormsCore {
 
     public getRequiredFields(): HTMLElement[] {
         return this.requiredFields;
+    }
+
+    public submit(): void {
+        console.log("submitting...!");
+    }
+
+    public bindSubmit(): void {
+        this.form.addEventListener("submit", this.submitEvent);
+    }
+
+    public unbindSubmit(): void {
+        this.form.removeEventListener("submit", this.submitEvent);
     }
 
     private findRequiredFields(): HTMLElement[] {

@@ -27,6 +27,6 @@ it("correctly returns early and warns if the element is not found", () => {
 
     expect(instance.getForm()).not.toBeDefined();
     expect(spy).toHaveBeenCalledWith(
-        "Initialising PropForms without a form, try to avoid doing this."
+        "Initialising PropForms without a form, try to avoid doing this, 95% of the code base has been disabled."
     );
 });

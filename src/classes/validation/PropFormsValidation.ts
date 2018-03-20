@@ -10,6 +10,9 @@ export default class PropFormsValidation {
         this.form = form;
         this.fields = fields;
         this.validators = this.createValidators();
+
+        // Turn HTML5 Validation off.
+        this.form.setAttribute("novalidate", "true");
     }
 
     public validate(): boolean {

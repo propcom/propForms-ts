@@ -18,7 +18,7 @@ export default class PropForms {
 
         if (typeof this.element === "undefined") {
             console.warn(
-                "Initialising PropForms without a form, try to avoid doing this."
+                "Initialising PropForms without a form, try to avoid doing this, 95% of the code base has been disabled."
             );
             return;
         }
@@ -57,6 +57,24 @@ export default class PropForms {
     public enable() {
         if (typeof this.core !== "undefined") {
             this.core.enable();
+        }
+    }
+
+    public submit() {
+        if (typeof this.core !== "undefined") {
+            this.core.submit();
+        }
+    }
+
+    public unbindSubmit() {
+        if (typeof this.core !== "undefined") {
+            this.core.unbindSubmit();
+        }
+    }
+
+    public bindSubmit() {
+        if (typeof this.core !== "undefined") {
+            this.core.bindSubmit();
         }
     }
 
