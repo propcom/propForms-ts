@@ -6,6 +6,7 @@ const form = document.getElementById("form");
 if (form && form instanceof HTMLFormElement) {
     const instance = new PropForms(form);
     const toggle = document.getElementById("toggle");
+    const validate = document.getElementById("validate");
 
     toggle &&
         toggle.addEventListener("click", () => {
@@ -18,5 +19,10 @@ if (form && form instanceof HTMLFormElement) {
             }
 
             console.log(instance.getRequiredFields());
+        });
+
+    validate &&
+        validate.addEventListener("click", () => {
+            console.log(instance.validate());
         });
 }

@@ -1,15 +1,26 @@
 import { findElements } from "./utils/utils";
+import PropFormsValidation from "./validation/PropFormsValidation";
 
 export default class PropFormsCore {
     private readonly form: HTMLFormElement;
     private options: PropFormsOptions;
     private requiredFields: HTMLElement[];
+    private validator: PropFormsValidation;
+
     public isDisabled: boolean = false;
 
     constructor(form: HTMLFormElement, options: PropFormsOptions) {
         this.options = options;
         this.form = form;
         this.requiredFields = this.findRequiredFields();
+        this.validator = new PropFormsValidation(
+            this.form,
+            this.requiredFields
+        );
+    }
+
+    public validate(): boolean {
+        return this.validator.validate();
     }
 
     public getRequiredFields(): HTMLElement[] {

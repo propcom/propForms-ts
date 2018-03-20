@@ -1,4 +1,5 @@
 type PropFormsOptions = {
-    parent?: Element;
+    parent?: HTMLElement;
     errorClass: string;
+    validators?: { [name: string]: PropFormsValidator<HTMLElement> };
 };

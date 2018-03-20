@@ -67,4 +67,12 @@ export default class PropForms {
 
         return [];
     }
+
+    public validate(): boolean {
+        if (typeof this.core !== "undefined") {
+            return this.core.validate();
+        }
+
+        return false;
+    }
 }
