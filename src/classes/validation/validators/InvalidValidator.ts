@@ -1,11 +1,4 @@
-export default class InvalidValidator
-    implements PropFormsValidator<HTMLElement> {
-    readonly element: HTMLElement;
-
-    constructor(element: HTMLElement) {
-        this.element = element;
-    }
-
+export default class InvalidValidator extends PropFormsValidator<HTMLElement> {
     validate(): boolean {
         return false;
     }

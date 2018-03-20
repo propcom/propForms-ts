@@ -1,9 +1,13 @@
-interface PropFormsValidator<T extends HTMLElement> {
+abstract class PropFormsValidator<T extends HTMLElement> {
     readonly element: T;
 
-    validate(): boolean;
+    constructor(element: T) {
+        this.element = element;
+    }
 
-    error(): T;
+    abstract validate(): boolean;
 
-    pass(): T;
+    abstract error(): T;
+
+    abstract pass(): T;
 }

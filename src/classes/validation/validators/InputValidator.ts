@@ -1,11 +1,6 @@
-export default class InputValidator
-    implements PropFormsValidator<HTMLInputElement> {
-    readonly element: HTMLInputElement;
-
-    constructor(element: HTMLInputElement) {
-        this.element = element;
-    }
-
+export default class InputValidator extends PropFormsValidator<
+    HTMLInputElement
+> {
     validate(): boolean {
         console.log("validate input element...");
         return this.element.value.length > 0;

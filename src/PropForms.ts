@@ -3,7 +3,7 @@ import PropFormsCore from "./classes/PropFormsCore";
 export default class PropForms {
     private readonly element?: HTMLFormElement;
     private core?: PropFormsCore;
-    private options: PropFormsOptions = {
+    private settings: PropFormsSettings = {
         errorClass: "propForms-error"
     };
 
@@ -14,7 +14,7 @@ export default class PropForms {
             this.element = element;
         }
 
-        this.options = { ...this.options, ...options };
+        this.settings = { ...this.settings, ...options };
 
         if (typeof this.element === "undefined") {
             console.warn(
@@ -23,7 +23,7 @@ export default class PropForms {
             return;
         }
 
-        this.core = new PropFormsCore(this.element, this.options);
+        this.core = new PropFormsCore(this.element, this.settings);
     }
 
     private findForm(identifier: string): HTMLFormElement | undefined {
