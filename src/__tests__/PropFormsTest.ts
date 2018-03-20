@@ -14,10 +14,8 @@ it("correctly initialises with an element selector", () => {
     }
 });
 
-it("correctly initialises with a string selector", () => {
-    const form = document.getElementById("form");
+it("correctly initialises with a correct string selector", () => {
     const instance: PropForms = new PropForms("#form");
-
     expect(instance.getForm()).toBeDefined();
 });
 
