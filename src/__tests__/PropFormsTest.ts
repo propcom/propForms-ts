@@ -9,6 +9,8 @@ it("correctly initialises with an element selector", () => {
     if (form instanceof HTMLFormElement) {
         const instance: PropForms = new PropForms(form);
         expect(instance.getForm()).toBe(form);
+    } else {
+        fail("Element not found in index.html");
     }
 });
 
@@ -16,7 +18,7 @@ it("correctly initialises with a string selector", () => {
     const form = document.getElementById("form");
     const instance: PropForms = new PropForms("#form");
 
-    expect(instance.getForm()).toBe(form as HTMLFormElement);
+    expect(instance.getForm()).toBeDefined();
 });
 
 it("correctly returns early if the element is not found", () => {
