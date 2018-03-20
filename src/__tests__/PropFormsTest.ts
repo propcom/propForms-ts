@@ -10,7 +10,9 @@ it("correctly initialises with an element selector", () => {
         const instance: PropForms = new PropForms(form);
         expect(instance.getForm()).toBe(form);
     } else {
-        fail("Element not found in index.html");
+        fail(
+            "Element not found in index.html, unable to conduct test properly."
+        );
     }
 });
 
@@ -19,7 +21,12 @@ it("correctly initialises with a correct string selector", () => {
     expect(instance.getForm()).toBeDefined();
 });
 
-it("correctly returns early if the element is not found", () => {
+it("correctly returns early and warns if the element is not found", () => {
+    const spy = spyOn(console, "warn");
     const instance: PropForms = new PropForms("#nothing");
+
     expect(instance.getForm()).not.toBeDefined();
+    expect(spy).toHaveBeenCalledWith(
+        "Initialising PropForms without a form, try to avoid doing this."
+    );
 });

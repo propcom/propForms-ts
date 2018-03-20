@@ -17,6 +17,9 @@ export default class PropForms {
         this.options = { ...this.options, ...options };
 
         if (typeof this.element === "undefined") {
+            console.warn(
+                "Initialising PropForms without a form, try to avoid doing this."
+            );
             return;
         }
 

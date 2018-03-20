@@ -1,15 +1,20 @@
-import TestUtils from "../../../TestUtils";
-import PropForms from "../../PropForms";
+import TestUtils from "../../../../TestUtils";
+import PropForms from "../../../PropForms";
 
 beforeEach(TestUtils.setUp);
 
 it("correctly tracks the disabled state", () => {
     const instance: PropForms = new PropForms("#form");
-    instance.disable();
+    const form = instance.getForm();
 
-    expect(instance.isDisabled()).toBe(true);
-    instance.enable();
-    expect(instance.isDisabled()).toBe(false);
+    if (form) {
+        instance.disable();
+        expect(instance.isDisabled()).toBe(true);
+        instance.enable();
+        expect(instance.isDisabled()).toBe(false);
+    } else {
+        fail("No form found to conduct test");
+    }
 });
 
 it("correctly applies opacity and disabled to all the elements of the form when disabling", () => {
