@@ -23,6 +23,10 @@ export default class PropFormsCore {
         return this.validator.validate();
     }
 
+    public validateField(id: string): boolean {
+        return this.validator.validateField(id);
+    }
+
     public getRequiredFields(): HTMLElement[] {
         return this.requiredFields;
     }

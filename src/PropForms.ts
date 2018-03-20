@@ -75,4 +75,12 @@ export default class PropForms {
 
         return false;
     }
+
+    public validateField(id: string): boolean {
+        if (typeof this.core !== "undefined") {
+            return this.core.validateField(id);
+        }
+
+        return false;
+    }
 }

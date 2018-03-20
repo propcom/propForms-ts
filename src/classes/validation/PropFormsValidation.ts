@@ -17,6 +17,33 @@ export default class PropFormsValidation {
             return v.validate();
         });
 
+        if (results.length === 0) {
+            return true;
+        }
+
+        return results.reduce((p, c) => {
+            return p && c;
+        });
+    }
+
+    public validateField(id: string): boolean {
+        const validators: PropFormsValidator<
+            HTMLElement
+        >[] = this.validators.filter(v => {
+            return v.element.id === id;
+        });
+
+        const results: boolean[] = validators.map(v => {
+            return v.validate();
+        });
+
+        if (results.length === 0) {
+            console.warn(
+                `There was no validator found for ${id}, auto passing`
+            );
+            return true;
+        }
+
         return results.reduce((p, c) => {
             return p && c;
         });
