@@ -1,16 +1,26 @@
+import { findElements } from "./utils/utils";
+
 export default class PropFormsCore {
     private readonly form: HTMLFormElement;
     private options: PropFormsOptions;
+    private requiredFields: HTMLElement[];
     public isDisabled: boolean = false;
 
     constructor(form: HTMLFormElement, options: PropFormsOptions) {
         this.options = options;
         this.form = form;
+        this.requiredFields = this.findRequiredFields();
+    }
+
+    public getRequiredFields(): HTMLElement[] {
+        return this.requiredFields;
+    }
+
+    private findRequiredFields(): HTMLElement[] {
+        return findElements<HTMLElement>(this.form, "*[required]");
     }
 
     public disable(disable: boolean = true) {
-        const opacity: string = disable ? "0.3" : "1.0";
-
         for (let i = 0; i < this.form.elements.length; i++) {
             const element: HTMLElement = this.form.elements.item(
                 i
@@ -18,7 +28,7 @@ export default class PropFormsCore {
 
             if (disable) {
                 element.setAttribute("disabled", "true");
-                element.style.opacity = opacity;
+                element.style.opacity = "0.3";
             } else {
                 element.removeAttribute("disabled");
                 element.style.removeProperty("opacity");

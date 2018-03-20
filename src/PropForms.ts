@@ -56,4 +56,12 @@ export default class PropForms {
             this.core.disable(false);
         }
     }
+
+    public getRequiredFields(): HTMLElement[] {
+        if (typeof this.core !== "undefined") {
+            return this.core.getRequiredFields();
+        }
+
+        return [];
+    }
 }

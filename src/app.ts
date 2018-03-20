@@ -11,8 +11,12 @@ if (form && form instanceof HTMLFormElement) {
         toggle.addEventListener("click", () => {
             if (instance.isDisabled()) {
                 instance.enable();
+                toggle.innerText = "Disable";
             } else {
                 instance.disable();
+                toggle.innerText = "Enable";
             }
+
+            console.log(instance.getRequiredFields());
         });
 }
