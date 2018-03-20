@@ -1,5 +1,6 @@
 import InputValidator from "../InputValidator";
 import InvalidValidator from "../InvalidValidator";
+import PropFormsValidator from "../abstract/PropFormsValidator";
 
 export default class ValidatorFactory {
     static createValidator(

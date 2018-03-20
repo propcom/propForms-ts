@@ -1,4 +1,5 @@
 import ValidatorFactory from "./validators/factory/ValidatorFactory";
+import PropFormsValidator from "./validators/abstract/PropFormsValidator";
 
 export default class PropFormsValidation {
     private readonly form: HTMLFormElement;

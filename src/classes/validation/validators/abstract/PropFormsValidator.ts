@@ -1,4 +1,4 @@
-abstract class PropFormsValidator<T extends HTMLElement> {
+export default abstract class PropFormsValidator<T extends HTMLElement> {
     readonly element: T;
 
     constructor(element: T) {
@@ -11,5 +11,3 @@ abstract class PropFormsValidator<T extends HTMLElement> {
 
     abstract pass(): T;
 }
-
-export default PropFormsValidator;
