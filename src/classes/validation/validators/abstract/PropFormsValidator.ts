@@ -11,3 +11,5 @@ abstract class PropFormsValidator<T extends HTMLElement> {
 
     abstract pass(): T;
 }
+
+export default PropFormsValidator;
