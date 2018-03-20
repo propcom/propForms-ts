@@ -1,5 +1,6 @@
-import { findElements } from "./utils/utils";
+import { findElements, dispatchEvent } from "./utils/utils";
 import PropFormsValidation from "./validation/PropFormsValidation";
+import PropFormsEvent from "./model/events/PropFormsEvent";
 
 export default class PropFormsCore {
     private readonly form: HTMLFormElement;
@@ -35,21 +36,35 @@ export default class PropFormsCore {
         return findElements<HTMLElement>(this.form, "*[required]");
     }
 
-    public disable(disable: boolean = true) {
+    public disable() {
+        const event: PropFormsEvent = new PropFormsEvent("disable", this.form);
+
         for (let i = 0; i < this.form.elements.length; i++) {
             const element: HTMLElement = this.form.elements.item(
                 i
             ) as HTMLElement;
 
-            if (disable) {
-                element.setAttribute("disabled", "true");
-                element.style.opacity = "0.3";
-            } else {
-                element.removeAttribute("disabled");
-                element.style.removeProperty("opacity");
-            }
+            element.setAttribute("disabled", "true");
+            element.style.opacity = "0.3";
         }
 
-        this.isDisabled = disable;
+        this.isDisabled = true;
+        dispatchEvent(event);
+    }
+
+    public enable() {
+        const event: PropFormsEvent = new PropFormsEvent("enable", this.form);
+
+        for (let i = 0; i < this.form.elements.length; i++) {
+            const element: HTMLElement = this.form.elements.item(
+                i
+            ) as HTMLElement;
+
+            element.removeAttribute("disabled");
+            element.style.removeProperty("opacity");
+        }
+
+        this.isDisabled = false;
+        dispatchEvent(event);
     }
 }

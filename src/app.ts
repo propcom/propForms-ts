@@ -5,6 +5,7 @@ const form = document.getElementById("form");
 
 if (form && form instanceof HTMLFormElement) {
     const instance = new PropForms(form);
+    const comments = document.getElementById("comments");
     const toggle = document.getElementById("toggle");
     const validate = document.getElementById("validate");
 
@@ -17,12 +18,24 @@ if (form && form instanceof HTMLFormElement) {
                 instance.disable();
                 toggle.innerText = "Enable";
             }
-
-            console.log(instance.getRequiredFields());
         });
 
     validate &&
         validate.addEventListener("click", () => {
             console.log(instance.validate());
         });
+
+    form.addEventListener("enable", e => {
+        console.log("enabled", e);
+    });
+
+    form.addEventListener("disable", e => {
+        console.log("disabled", e);
+    });
+
+    if (comments) {
+        comments.addEventListener("keyup", () => {
+            instance.validateField("comments");
+        });
+    }
 }

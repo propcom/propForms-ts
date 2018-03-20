@@ -1,3 +1,5 @@
+import PropFormsEvent from "../model/events/PropFormsEvent";
+
 export function findElements<T extends HTMLElement>(
     parent: HTMLElement,
     selector: string
@@ -10,4 +12,9 @@ export function findElements<T extends HTMLElement>(
     }
 
     return elements;
+}
+
+export function dispatchEvent(event: PropFormsEvent): boolean {
+    const evt: CustomEvent = event.build();
+    return event.element.dispatchEvent(evt);
 }

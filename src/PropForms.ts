@@ -56,7 +56,7 @@ export default class PropForms {
 
     public enable() {
         if (typeof this.core !== "undefined") {
-            this.core.disable(false);
+            this.core.enable();
         }
     }
 
