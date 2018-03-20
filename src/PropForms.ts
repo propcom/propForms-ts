@@ -1,7 +1,8 @@
-export default class PropForms {
-    static version: String = `3.0.0`;
+import PropFormsCore from "./classes/PropFormsCore";
 
-    private element?: HTMLFormElement;
+export default class PropForms {
+    private readonly element?: HTMLFormElement;
+    private core?: PropFormsCore;
     private options: PropFormsOptions = {
         errorClass: "propForms-error"
     };
@@ -18,6 +19,8 @@ export default class PropForms {
         if (typeof this.element === "undefined") {
             return;
         }
+
+        this.core = new PropFormsCore(this.element, this.options);
     }
 
     private findForm(identifier: string): HTMLFormElement | undefined {
@@ -32,5 +35,25 @@ export default class PropForms {
 
     public getForm(): HTMLFormElement | undefined {
         return this.element;
+    }
+
+    public isDisabled(): boolean {
+        if (typeof this.core !== "undefined") {
+            return this.core.isDisabled;
+        }
+
+        return false;
+    }
+
+    public disable() {
+        if (typeof this.core !== "undefined") {
+            this.core.disable();
+        }
+    }
+
+    public enable() {
+        if (typeof this.core !== "undefined") {
+            this.core.disable(false);
+        }
     }
 }
