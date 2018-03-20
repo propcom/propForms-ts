@@ -18,5 +18,5 @@
         "noImplicitReturns": true,
         "strictPropertyInitialization": true
     },
-    "exclude": ["node_modules", "**/__tests__", "src/app.ts"]
+    "exclude": ["node_modules", "**/__tests__", "src/app.ts", "dist"]
 }
