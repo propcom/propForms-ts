@@ -1,6 +1,8 @@
 import PropFormsCore from "./classes/PropFormsCore";
+import { PropFormsSettings } from "./types/PropFormsSettings";
+import { PropFormsOptions } from "./types/PropFormsOptions";
 import PropFormsEvent from "./classes/events/model/PropFormsEvent";
-import PropFormsEvents from "./classes/events/PropFormsEvents";
+import PropFormsValidator from "./classes/validation/validators/abstract/PropFormsValidator";
 
 export default class PropForms {
     private readonly element?: HTMLFormElement;
@@ -116,3 +118,6 @@ export default class PropForms {
         }
     }
 }
+
+// Exports for publicly available types
+export { PropFormsEvent, PropFormsValidator, PropFormsOptions };

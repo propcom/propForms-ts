@@ -1,11 +1,13 @@
 import { findElements } from "./utils/utils";
 import PropFormsValidation from "./validation/PropFormsValidation";
-import PropFormsEvent from "./events/model/PropFormsEvent";
 import PropFormsEvents from "./events/PropFormsEvents";
+import { PropFormsOptions } from "../types/PropFormsOptions";
+import PropFormsEvent from "./events/model/PropFormsEvent";
+import { PropFormsSettings } from "../types/PropFormsSettings";
 
 export default class PropFormsCore {
     private readonly form: HTMLFormElement;
-    private options: PropFormsOptions;
+    private settings: PropFormsSettings;
     private requiredFields: HTMLElement[];
 
     public validator: PropFormsValidation;
@@ -17,11 +19,11 @@ export default class PropFormsCore {
         this.submit();
     };
 
-    constructor(form: HTMLFormElement, options: PropFormsOptions) {
-        this.options = options;
+    constructor(form: HTMLFormElement, settings: PropFormsSettings) {
+        this.settings = settings;
         this.form = form;
         this.requiredFields = this.findRequiredFields();
-        this.validator = new PropFormsValidation(this.form, this.requiredFields);
+        this.validator = new PropFormsValidation(this.form, this.requiredFields, this.settings);
 
         this.bindSubmit();
     }

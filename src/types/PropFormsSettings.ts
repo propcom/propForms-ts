@@ -1,6 +1,9 @@
 // The final settings for the instance, after merging with options
 
-type PropFormsSettings = {
+import PropFormsValidator from "../classes/validation/validators/abstract/PropFormsValidator";
+
+export type PropFormsSettings = {
     parent?: HTMLElement;
     errorClass: string;
+    validators?: PropFormsValidator<HTMLElement>[];
 };

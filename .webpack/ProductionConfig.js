@@ -28,13 +28,10 @@ class ProductionConfig extends Config {
                     {
                         loader: "ts-loader",
                         options: {
-                            configFile: path.join(
-                                process.cwd(),
-                                "tsconfig.json"
-                            ),
+                            configFile: path.join(process.cwd(), "tsconfig.json"),
                             compilerOptions: {
                                 declaration: true,
-                                declarationDir: ""
+                                outDir: ""
                             }
                         }
                     }
