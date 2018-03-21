@@ -1,12 +1,15 @@
-import { findElements, dispatchEvent } from "./utils/utils";
+import { findElements } from "./utils/utils";
 import PropFormsValidation from "./validation/PropFormsValidation";
-import PropFormsEvent from "./model/events/PropFormsEvent";
+import PropFormsEvent from "./events/model/PropFormsEvent";
+import PropFormsEvents from "./events/PropFormsEvents";
 
 export default class PropFormsCore {
     private readonly form: HTMLFormElement;
     private options: PropFormsOptions;
     private requiredFields: HTMLElement[];
-    private validator: PropFormsValidation;
+
+    public validator: PropFormsValidation;
+    public events: PropFormsEvents = new PropFormsEvents();
     public isDisabled: boolean = false;
 
     private submitEvent = (e: Event) => {
@@ -18,20 +21,9 @@ export default class PropFormsCore {
         this.options = options;
         this.form = form;
         this.requiredFields = this.findRequiredFields();
-        this.validator = new PropFormsValidation(
-            this.form,
-            this.requiredFields
-        );
+        this.validator = new PropFormsValidation(this.form, this.requiredFields);
 
         this.bindSubmit();
-    }
-
-    public validate(): boolean {
-        return this.validator.validate();
-    }
-
-    public validateField(id: string): boolean {
-        return this.validator.validateField(id);
     }
 
     public getRequiredFields(): HTMLElement[] {
@@ -58,31 +50,27 @@ export default class PropFormsCore {
         const event: PropFormsEvent = new PropFormsEvent("disable", this.form);
 
         for (let i = 0; i < this.form.elements.length; i++) {
-            const element: HTMLElement = this.form.elements.item(
-                i
-            ) as HTMLElement;
+            const element: HTMLElement = this.form.elements.item(i) as HTMLElement;
 
             element.setAttribute("disabled", "true");
             element.style.opacity = "0.3";
         }
 
         this.isDisabled = true;
-        dispatchEvent(event);
+        this.events.dispatch(event);
     }
 
     public enable() {
         const event: PropFormsEvent = new PropFormsEvent("enable", this.form);
 
         for (let i = 0; i < this.form.elements.length; i++) {
-            const element: HTMLElement = this.form.elements.item(
-                i
-            ) as HTMLElement;
+            const element: HTMLElement = this.form.elements.item(i) as HTMLElement;
 
             element.removeAttribute("disabled");
             element.style.removeProperty("opacity");
         }
 
         this.isDisabled = false;
-        dispatchEvent(event);
+        this.events.dispatch(event);
     }
 }

@@ -10,9 +10,7 @@ it("correctly initialises with an element selector", () => {
         const instance: PropForms = new PropForms(form);
         expect(instance.getForm()).toBe(form);
     } else {
-        fail(
-            "Element not found in index.html, unable to conduct test properly."
-        );
+        fail("Element not found in index.html, unable to conduct test properly.");
     }
 });
 

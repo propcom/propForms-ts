@@ -1,8 +1,6 @@
 import PropFormsValidator from "./abstract/PropFormsValidator";
 
-export default class TextAreaValidator extends PropFormsValidator<
-    HTMLTextAreaElement
-> {
+export default class TextAreaValidator extends PropFormsValidator<HTMLTextAreaElement> {
     validate(): boolean {
         console.log("validating a textarea");
         return true;

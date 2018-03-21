@@ -1,12 +1,8 @@
-import InputValidator from "../InputValidator";
-import InvalidValidator from "../InvalidValidator";
+import { InvalidValidator, InputValidator, TextAreaValidator } from "../index";
 import PropFormsValidator from "../abstract/PropFormsValidator";
-import TextAreaValidator from "../TextAreaValidator";
 
 export default class ValidatorFactory {
-    static createValidator(
-        element: HTMLElement
-    ): PropFormsValidator<HTMLElement> {
+    static createValidator(element: HTMLElement): PropFormsValidator<HTMLElement> {
         if (element instanceof HTMLInputElement) {
             return new InputValidator(element);
         }

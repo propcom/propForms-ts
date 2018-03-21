@@ -1,4 +1,6 @@
 import PropFormsCore from "./classes/PropFormsCore";
+import PropFormsEvent from "./classes/events/model/PropFormsEvent";
+import PropFormsEvents from "./classes/events/PropFormsEvents";
 
 export default class PropForms {
     private readonly element?: HTMLFormElement;
@@ -88,7 +90,7 @@ export default class PropForms {
 
     public validate(): boolean {
         if (typeof this.core !== "undefined") {
-            return this.core.validate();
+            return this.core.validator.validate();
         }
 
         return false;
@@ -96,9 +98,21 @@ export default class PropForms {
 
     public validateField(id: string): boolean {
         if (typeof this.core !== "undefined") {
-            return this.core.validateField(id);
+            return this.core.validator.validateField(id);
         }
 
         return false;
+    }
+
+    public on(event: string, fn: (e: PropFormsEvent) => void) {
+        if (typeof this.core !== "undefined") {
+            this.core.events.on(event, fn);
+        }
+    }
+
+    public remove(event: string, fn: (e: PropFormsEvent) => void) {
+        if (typeof this.core !== "undefined") {
+            this.core.events.remove(event, fn);
+        }
     }
 }

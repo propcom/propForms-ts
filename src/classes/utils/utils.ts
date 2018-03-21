@@ -1,9 +1,6 @@
-import PropFormsEvent from "../model/events/PropFormsEvent";
+import PropFormsEvent from "../events/model/PropFormsEvent";
 
-export function findElements<T extends HTMLElement>(
-    parent: HTMLElement,
-    selector: string
-): T[] {
+export function findElements<T extends HTMLElement>(parent: HTMLElement, selector: string): T[] {
     const results: NodeListOf<T> = parent.querySelectorAll(selector);
     const elements: T[] = [];
 
@@ -12,9 +9,4 @@ export function findElements<T extends HTMLElement>(
     }
 
     return elements;
-}
-
-export function dispatchEvent(event: PropFormsEvent): boolean {
-    const evt: CustomEvent = event.build();
-    return event.element.dispatchEvent(evt);
 }

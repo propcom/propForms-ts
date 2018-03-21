@@ -30,9 +30,7 @@ export default class PropFormsValidation {
     }
 
     public validateField(id: string): boolean {
-        const validators: PropFormsValidator<
-            HTMLElement
-        >[] = this.validators.filter(v => {
+        const validators: PropFormsValidator<HTMLElement>[] = this.validators.filter(v => {
             return v.element.id === id;
         });
 
@@ -41,9 +39,7 @@ export default class PropFormsValidation {
         });
 
         if (results.length === 0) {
-            console.warn(
-                `There was no validator found for ${id}, auto passing`
-            );
+            console.warn(`There was no validator found for ${id}, auto passing`);
             return true;
         }
 
