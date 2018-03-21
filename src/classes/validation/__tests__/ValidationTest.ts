@@ -1,22 +1,26 @@
 import PropFormsValidation from "../PropFormsValidation";
 import TestUtils from "../../../../TestUtils";
+import { PropFormsSettings } from "../../../types/PropFormsSettings";
 
-let validation: PropFormsValidation;
+const settings: PropFormsSettings = {
+    errorClass: "error"
+};
+
+let form: HTMLFormElement;
 
 beforeAll(TestUtils.setUp);
 
 beforeEach(() => {
-    const form = document.getElementById("form");
+    const element = document.getElementById("form");
 
-    if (form && form instanceof HTMLFormElement) {
-        validation = new PropFormsValidation(form, [], {
-            errorClass: "error"
-        });
+    if (element && element instanceof HTMLFormElement) {
+        form = element;
     } else {
         fail("Cannot find form markup to conduct test");
     }
 });
 
 it("should pass validation if there are no required fields (fields is empty)", () => {
+    const validation = new PropFormsValidation(form, [], settings);
     expect(validation.validate()).toBe(true);
 });
