@@ -1,3 +1,4 @@
+import PropFormsValidator from "../abstract/PropFormsValidator";
 import {
     InvalidValidator,
     InputTextValidator,
@@ -8,7 +9,6 @@ import {
     SelectValidator,
     EmailValidator
 } from "../index";
-import PropFormsValidator from "../abstract/PropFormsValidator";
 
 export default class ValidatorFactory {
     static createValidator(element: HTMLElement): PropFormsValidator<HTMLElement> {

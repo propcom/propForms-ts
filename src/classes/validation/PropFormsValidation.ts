@@ -20,7 +20,10 @@ export default class PropFormsValidation {
 
     public validate(): boolean {
         const results: boolean[] = this.validators.map(v => {
-            return v.validate();
+            const isValid: boolean = v.validate();
+            isValid ? v.pass() : v.error();
+
+            return isValid;
         });
 
         if (results.length === 0) {
@@ -38,7 +41,10 @@ export default class PropFormsValidation {
         });
 
         const results: boolean[] = validators.map(v => {
-            return v.validate();
+            const isValid: boolean = v.validate();
+            isValid ? v.pass() : v.error();
+
+            return isValid;
         });
 
         if (results.length === 0) {

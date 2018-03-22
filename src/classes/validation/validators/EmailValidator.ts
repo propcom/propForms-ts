@@ -1,16 +1,22 @@
-import PropFormsValidator from "./abstract/PropFormsValidator";
+import InputTextValidator from "./InputTextValidator";
 
-export default class EmailValidator extends PropFormsValidator<HTMLInputElement> {
+export default class EmailValidator extends InputTextValidator {
     validate(): boolean {
-        console.log("validate input email element...");
-        return this.element.value.length > 0;
+        const rules: boolean[] = [super.validate(), this.validateEmail()];
+
+        console.log(this.validateEmail(), this.element.value);
+
+        return rules.reduce((p, c) => p && c);
     }
 
-    error(): HTMLInputElement {
-        return this.element;
-    }
+    validateEmail(): boolean {
+        const regEx = /^([^.][^\s\\@]+[^.])@(([0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,}|[0-9]{1,3})$/;
+        const result = regEx.test(this.element.value);
 
-    pass(): HTMLInputElement {
-        return this.element;
+        if (!result) {
+            this.errorMessage = "Please enter a valid email address";
+        }
+
+        return result;
     }
 }
