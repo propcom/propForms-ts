@@ -1,17 +1,27 @@
 import TestUtils from "../../TestUtils";
 import PropForms from "../PropForms";
+import { JSDOM } from "jsdom";
 
-beforeEach(TestUtils.setUp);
+let form: HTMLFormElement;
+
+beforeEach((done: DoneFn) => {
+    TestUtils.setUp().then((dom: JSDOM) => {
+        document.body.innerHTML = dom.serialize();
+        const element = document.getElementById("form");
+
+        if (element && element instanceof HTMLFormElement) {
+            form = element;
+        } else {
+            fail("Cannot find form markup to conduct test");
+        }
+
+        done();
+    });
+}, 2000);
 
 it("correctly initialises with an element selector", () => {
-    const form = document.getElementById("form");
-
-    if (form instanceof HTMLFormElement) {
-        const instance: PropForms = new PropForms(form);
-        expect(instance.getForm()).toBe(form);
-    } else {
-        fail("Element not found in index.html, unable to conduct test properly.");
-    }
+    const instance: PropForms = new PropForms(form);
+    expect(instance.getForm()).toBe(form);
 });
 
 it("correctly initialises with a correct string selector", () => {
