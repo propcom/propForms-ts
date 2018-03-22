@@ -1,9 +1,9 @@
 import PropFormsValidator from "./abstract/PropFormsValidator";
 
-export default class InputValidator extends PropFormsValidator<HTMLInputElement> {
+export default class RadioValidator extends PropFormsValidator<HTMLInputElement> {
     validate(): boolean {
-        console.log("validate input element...");
-        return this.element.value.length > 0;
+        console.log("validate input radio element...");
+        return this.element.checked;
     }
 
     error(): HTMLInputElement {

@@ -5,7 +5,7 @@ import { JSDOM } from "jsdom";
 let form: HTMLFormElement;
 
 beforeEach((done: DoneFn) => {
-    TestUtils.setUp().then((dom: JSDOM) => {
+    TestUtils.setUp("required").then((dom: JSDOM) => {
         document.body.innerHTML = dom.serialize();
         const element = document.getElementById("form");
 
@@ -20,6 +20,6 @@ beforeEach((done: DoneFn) => {
 }, 2000);
 
 it("Correctly applies and returns all the required fields", () => {
-    const instance: PropForms = new PropForms("#form");
+    const instance: PropForms = new PropForms(form);
     expect(instance.getRequiredFields().length).toBe(2);
 });
