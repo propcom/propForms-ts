@@ -1,5 +1,5 @@
 import PropFormsValidator from "./abstract/PropFormsValidator";
-import { queryElements } from "../../utils/utils";
+import { queryElements } from "../../../utils/utils";
 
 export default class RadioValidator extends PropFormsValidator<HTMLInputElement> {
     private radios: HTMLInputElement[];

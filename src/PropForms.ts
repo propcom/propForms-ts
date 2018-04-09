@@ -3,6 +3,7 @@ import { PropFormsSettings } from "./types/PropFormsSettings";
 import { PropFormsOptions } from "./types/PropFormsOptions";
 import PropFormsEvent from "./classes/events/model/PropFormsEvent";
 import PropFormsValidator from "./classes/validation/validators/abstract/PropFormsValidator";
+import PropFormsPopulate from "./classes/populate/PropFormsPopulate";
 
 export default class PropForms {
     private readonly element?: HTMLFormElement;
@@ -115,6 +116,24 @@ export default class PropForms {
     public remove(event: string, fn: (e: PropFormsEvent) => void) {
         if (typeof this.core !== "undefined") {
             this.core.events.remove(event, fn);
+        }
+    }
+
+    public populate() {
+        const form = this.getForm();
+
+        if (typeof form !== "undefined") {
+            const populate = new PropFormsPopulate(form);
+            populate.populate();
+        }
+    }
+
+    public clear() {
+        const form = this.getForm();
+
+        if (typeof form !== "undefined") {
+            const populate = new PropFormsPopulate(form);
+            populate.clear();
         }
     }
 }

@@ -12,6 +12,18 @@ if (form && form instanceof HTMLFormElement) {
     const comments = document.getElementById("comments");
     const toggle = document.getElementById("toggle");
     const validate = document.getElementById("validate");
+    const populate = document.getElementById("populate");
+    const clear = document.getElementById("clear");
+
+    populate &&
+        populate.addEventListener("click", () => {
+            instance.populate();
+        });
+
+    clear &&
+        clear.addEventListener("click", () => {
+            instance.clear();
+        });
 
     validate &&
         validate.addEventListener("click", () => {

@@ -1,5 +1,5 @@
 import { PropFormsSettings } from "../../../../types/PropFormsSettings";
-import { findParent } from "../../../utils/utils";
+import { findParent } from "../../../../utils/utils";
 
 export default abstract class PropFormsValidator<T extends HTMLElement> {
     readonly element: T;
