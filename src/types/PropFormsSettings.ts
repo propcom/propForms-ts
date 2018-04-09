@@ -3,7 +3,7 @@
 import PropFormsValidator from "../classes/validation/validators/abstract/PropFormsValidator";
 
 export type PropFormsSettings = {
-    parent?: HTMLElement;
+    parent?: string;
     errorClass: string;
     validators?: PropFormsValidator<HTMLElement>[];
 };

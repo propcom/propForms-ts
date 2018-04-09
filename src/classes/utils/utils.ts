@@ -19,3 +19,17 @@ export function queryElements<T extends HTMLElement>(selector: string): T[] {
 
     return elements;
 }
+
+export function findParent(className: string, element: HTMLElement): HTMLElement | undefined {
+    let current: HTMLElement | undefined = element;
+
+    while (current.parentElement) {
+        current = current.parentElement;
+
+        if (current.classList.contains(className)) {
+            return current;
+        }
+    }
+
+    return;
+}
