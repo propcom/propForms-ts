@@ -4,6 +4,7 @@ import PropFormsValidator from "../classes/validation/validators/abstract/PropFo
 
 export type PropFormsSettings = {
     parent?: string;
+    populate: boolean;
     errorClass: string;
     validators?: PropFormsValidator<HTMLElement>[];
 };

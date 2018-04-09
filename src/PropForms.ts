@@ -10,7 +10,8 @@ export default class PropForms {
     private readonly element?: HTMLFormElement;
     private core?: PropFormsCore;
     private settings: PropFormsSettings = {
-        errorClass: "propForms-error"
+        errorClass: "propForms-error",
+        populate: false
     };
 
     constructor(element: HTMLFormElement | string, options?: PropFormsOptions) {
@@ -30,6 +31,7 @@ export default class PropForms {
         }
 
         this.core = new PropFormsCore(this.element, this.settings);
+        this.settings.populate === true && this.populate();
     }
 
     private findForm(identifier: string): HTMLFormElement | undefined {
