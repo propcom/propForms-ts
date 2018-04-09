@@ -2,17 +2,24 @@ import ValidatorFactory from "./validators/factory/ValidatorFactory";
 import PropFormsValidator from "./validators/abstract/PropFormsValidator";
 import { PropFormsSettings } from "../../types/PropFormsSettings";
 import ValidationResult from "./validators/model/ValidationResult";
+import { findElements } from "../../utils/utils";
+import PropFormsEvents from "../events/PropFormsEvents";
+import Invalid from "./validators/model/Invalid";
+import Valid from "./validators/model/Valid";
 
 export default class PropFormsValidation {
     private readonly form: HTMLFormElement;
-    private readonly fields: HTMLElement[];
+    private readonly events: PropFormsEvents;
     private settings: PropFormsSettings;
     private validators: PropFormsValidator<HTMLElement>[];
 
-    constructor(form: HTMLFormElement, fields: HTMLElement[], settings: PropFormsSettings) {
+    public readonly requiredFields: HTMLElement[];
+
+    constructor(form: HTMLFormElement, settings: PropFormsSettings, events: PropFormsEvents) {
         this.settings = settings;
         this.form = form;
-        this.fields = fields;
+        this.events = events;
+        this.requiredFields = findElements<HTMLElement>(this.form, "*[required]");
         this.validators = this.createValidators();
 
         // Done like this so the user doesn't have to pass settings through to their validator, we handle it for them.
@@ -25,14 +32,7 @@ export default class PropFormsValidation {
     }
 
     public validate(): boolean {
-        const results: boolean[] = this.validators.map(v => {
-            const result: ValidationResult = v.validate();
-            result.isValid ? v.pass() : v.error();
-
-            console.log(result);
-
-            return result.isValid;
-        });
+        const results: boolean[] = this.validators.map(v => this.process(v));
 
         if (results.length === 0) {
             return true;
@@ -48,12 +48,7 @@ export default class PropFormsValidation {
             return v.element.id === id;
         });
 
-        const results: boolean[] = validators.map(v => {
-            const result: ValidationResult = v.validate();
-            result.isValid ? v.pass() : v.error();
-
-            return result.isValid;
-        });
+        const results: boolean[] = validators.map(v => this.process(v));
 
         if (results.length === 0) {
             console.warn(`There was no validator found for ${id}, auto passing`);
@@ -66,7 +61,7 @@ export default class PropFormsValidation {
     }
 
     private createValidators(): PropFormsValidator<HTMLElement>[] {
-        const requiredValidators = this.fields.map(field => {
+        const requiredValidators = this.requiredFields.map(field => {
             return ValidatorFactory.createValidator(field);
         });
 
@@ -75,5 +70,27 @@ export default class PropFormsValidation {
         }
 
         return requiredValidators;
+    }
+
+    private process(validator: PropFormsValidator<HTMLElement>): boolean {
+        const result: ValidationResult = validator.validate();
+
+        if (result.isValid) {
+            validator.pass();
+            this.dispatchValidEvent(result as Valid);
+        } else {
+            validator.error();
+            this.dispatchInvalidEvent(result as Invalid);
+        }
+
+        return result.isValid;
+    }
+
+    private dispatchInvalidEvent(result: Invalid) {
+        console.log(result);
+    }
+
+    private dispatchValidEvent(result: Valid) {
+        console.log(result);
     }
 }

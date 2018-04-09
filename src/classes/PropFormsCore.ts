@@ -8,7 +8,6 @@ import { PropFormsSettings } from "../types/PropFormsSettings";
 export default class PropFormsCore {
     private readonly form: HTMLFormElement;
     private settings: PropFormsSettings;
-    private requiredFields: HTMLElement[];
 
     public validator: PropFormsValidation;
     public events: PropFormsEvents = new PropFormsEvents();
@@ -22,14 +21,13 @@ export default class PropFormsCore {
     constructor(form: HTMLFormElement, settings: PropFormsSettings) {
         this.settings = settings;
         this.form = form;
-        this.requiredFields = this.findRequiredFields();
-        this.validator = new PropFormsValidation(this.form, this.requiredFields, this.settings);
+        this.validator = new PropFormsValidation(this.form, this.settings, this.events);
 
         this.bindSubmit();
     }
 
     public getRequiredFields(): HTMLElement[] {
-        return this.requiredFields;
+        return this.validator.requiredFields;
     }
 
     public submit(): void {
@@ -44,10 +42,6 @@ export default class PropFormsCore {
 
     public unbindSubmit(): void {
         this.form.removeEventListener("submit", this.submitEvent);
-    }
-
-    private findRequiredFields(): HTMLElement[] {
-        return findElements<HTMLElement>(this.form, "*[required]");
     }
 
     public disable() {
