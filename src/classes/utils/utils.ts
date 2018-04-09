@@ -8,3 +8,14 @@ export function findElements<T extends HTMLElement>(parent: HTMLElement, selecto
 
     return elements;
 }
+
+export function queryElements<T extends HTMLElement>(selector: string): T[] {
+    const results: NodeListOf<T> = document.querySelectorAll(selector);
+    const elements: T[] = [];
+
+    for (let i = 0; i < results.length; i++) {
+        elements.push(results.item(i));
+    }
+
+    return elements;
+}

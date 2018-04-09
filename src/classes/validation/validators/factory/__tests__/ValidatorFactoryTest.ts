@@ -37,6 +37,7 @@ it("Creates an CheckboxValidator if the element is input[type=checkbox]", () => 
 it("Creates an RadioValidator if the element is input[type=radio]", () => {
     const element: HTMLInputElement = document.createElement("input");
     element.type = "radio";
+    element.name = "test";
 
     const validator = ValidatorFactory.createValidator(element);
 
