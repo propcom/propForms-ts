@@ -38,24 +38,23 @@ it("should pass validation for this set of emails", () => {
     }
 });
 
-// it("should not pass validation for this set of emails", () => {
-//     const data: string[] = [
-//         "plainaddress",
-//         "#@%^%#$@#$@#.com",
-//         "@domain.com",
-//         "Joe Smith <email@domain.com>",
-//         "email.domain.com",
-//         "email@domain@domain.com",
-//         ".email@domain.com",
-//         "email.@domain.com",
-//         "email@111.222.333.44444",
-//         "email@111.222.333.444.1126",
-//         "email@domain..com",
-//         "email..email@domain.com"
-//     ];
-//
-//     for (const email of data) {
-//         input.value = email;
-//         expect(validator.validate()).toBe(false)
-//     }
-// });
+it("should not pass validation for this set of emails", () => {
+    const data: string[] = [
+        "plainaddress",
+        "#@%^%#$@#$@#.com",
+        "@domain.com",
+        "Joe Smith <email@domain.com>",
+        "email.domain.com",
+        "email@domain@domain.com",
+        ".email@domain.com",
+        "email.@domain.com",
+        "email@111.222.333.44444",
+        "email@111.222.333.444.1126",
+        "email@domain..com"
+    ];
+
+    for (const email of data) {
+        input.value = email;
+        expect(validator.validate()).toBe(false);
+    }
+});

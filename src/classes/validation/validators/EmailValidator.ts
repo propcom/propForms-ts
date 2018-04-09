@@ -4,8 +4,6 @@ export default class EmailValidator extends InputTextValidator {
     validate(): boolean {
         const rules: boolean[] = [super.validate(), this.validateEmail()];
 
-        console.log(this.validateEmail(), this.element.value);
-
         return rules.reduce((p, c) => p && c);
     }
 
