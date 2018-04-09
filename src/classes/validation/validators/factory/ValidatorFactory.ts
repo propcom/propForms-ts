@@ -10,6 +10,7 @@ import {
     EmailValidator
 } from "../index";
 import { PropFormsSettings } from "../../../../types/PropFormsSettings";
+import TelValidator from "../TelValidator";
 
 export default class ValidatorFactory {
     static createValidator(element: HTMLElement): PropFormsValidator<HTMLElement> {
@@ -25,6 +26,8 @@ export default class ValidatorFactory {
                     return new RadioValidator(element);
                 case "file":
                     return new FileValidator(element);
+                case "tel":
+                    return new TelValidator(element);
             }
         }
 

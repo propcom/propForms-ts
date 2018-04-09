@@ -33,7 +33,9 @@ export default class PropFormsCore {
     }
 
     public submit(): void {
-        console.log("submitting...!");
+        if (this.validator.validate() == true) {
+            console.log("Success!");
+        }
     }
 
     public bindSubmit(): void {
