@@ -1,6 +1,7 @@
 import ValidatorFactory from "./validators/factory/ValidatorFactory";
 import PropFormsValidator from "./validators/abstract/PropFormsValidator";
 import { PropFormsSettings } from "../../types/PropFormsSettings";
+import ValidationResult from "./validators/model/ValidationResult";
 
 export default class PropFormsValidation {
     private readonly form: HTMLFormElement;
@@ -25,10 +26,12 @@ export default class PropFormsValidation {
 
     public validate(): boolean {
         const results: boolean[] = this.validators.map(v => {
-            const isValid: boolean = v.validate();
-            isValid ? v.pass() : v.error();
+            const result: ValidationResult = v.validate();
+            result.isValid ? v.pass() : v.error();
 
-            return isValid;
+            console.log(result);
+
+            return result.isValid;
         });
 
         if (results.length === 0) {
@@ -46,10 +49,10 @@ export default class PropFormsValidation {
         });
 
         const results: boolean[] = validators.map(v => {
-            const isValid: boolean = v.validate();
-            isValid ? v.pass() : v.error();
+            const result: ValidationResult = v.validate();
+            result.isValid ? v.pass() : v.error();
 
-            return isValid;
+            return result.isValid;
         });
 
         if (results.length === 0) {

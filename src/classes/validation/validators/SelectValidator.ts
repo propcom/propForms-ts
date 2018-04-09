@@ -1,8 +1,9 @@
 import PropFormsValidator from "./abstract/PropFormsValidator";
+import ValidationResult from "./model/ValidationResult";
+import Valid from "./model/Valid";
 
 export default class SelectValidator extends PropFormsValidator<HTMLSelectElement> {
-    validate(): boolean {
-        console.log("validate select element...");
-        return true;
+    validate(): ValidationResult {
+        return new Valid(this.element);
     }
 }

@@ -1,18 +1,30 @@
 import { PropFormsSettings } from "../../../../types/PropFormsSettings";
 import { findParent } from "../../../../utils/utils";
+import ValidationResult from "../model/ValidationResult";
+import Valid from "../model/Valid";
+import Invalid from "../model/Invalid";
 
 export default abstract class PropFormsValidator<T extends HTMLElement> {
     readonly element: T;
 
     protected settings?: PropFormsSettings;
     protected parent?: HTMLElement;
-    protected errorMessage?: string;
+
+    static reduceResults(p: ValidationResult, c: ValidationResult): ValidationResult {
+        if (c instanceof Invalid) {
+            return c;
+        } else if (p instanceof Invalid) {
+            return p;
+        } else {
+            return c;
+        }
+    }
 
     constructor(element: T) {
         this.element = element;
     }
 
-    abstract validate(): boolean;
+    abstract validate(): ValidationResult;
 
     public setSettings(settings: PropFormsSettings) {
         this.settings = settings;

@@ -1,19 +1,16 @@
 import PropFormsValidator from "./abstract/PropFormsValidator";
+import ValidationResult from "./model/ValidationResult";
+import Invalid from "./model/Invalid";
+import Valid from "./model/Valid";
 
 export default class InputTextValidator extends PropFormsValidator<HTMLInputElement> {
-    validate(): boolean {
-        const rules: boolean[] = [this.validateLength()];
-
-        return rules.reduce((p, c) => p && c);
+    validate(): ValidationResult {
+        return this.validateLength();
     }
 
-    protected validateLength(): boolean {
-        const isValid: boolean = this.element.value.length > 0;
-
-        if (!isValid) {
-            this.errorMessage = "Please enter a value";
-        }
-
-        return isValid;
+    protected validateLength(): ValidationResult {
+        return this.element.value.length > 0
+            ? new Valid(this.element)
+            : new Invalid(this.element, 1, "Please enter a value");
     }
 }

@@ -11,10 +11,10 @@ beforeEach(() => {
 });
 
 it("should fail validation if no value entered", () => {
-    expect(validator.validate()).toBe(false);
+    expect(validator.validate().isValid).toBe(false);
 });
 
 it("should pass validation if a value is entered", () => {
     input.value = "Hey";
-    expect(validator.validate()).toBe(true);
+    expect(validator.validate().isValid).toBe(true);
 });

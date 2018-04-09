@@ -11,12 +11,12 @@ beforeEach(() => {
 });
 
 it("should fail validation if no value entered", () => {
-    expect(validator.validate()).toBe(false);
+    expect(validator.validate().isValid).toBe(false);
 });
 
 it("should fail validation if an arbitrary string that is not an email address is entered", () => {
     input.value = "arbitrary";
-    expect(validator.validate()).toBe(false);
+    expect(validator.validate().isValid).toBe(false);
 });
 
 it("should pass validation for this set of emails", () => {
@@ -34,7 +34,7 @@ it("should pass validation for this set of emails", () => {
 
     for (const email of data) {
         input.value = email;
-        expect(validator.validate()).toBe(true);
+        expect(validator.validate().isValid).toBe(true);
     }
 });
 
@@ -55,6 +55,6 @@ it("should not pass validation for this set of emails", () => {
 
     for (const email of data) {
         input.value = email;
-        expect(validator.validate()).toBe(false);
+        expect(validator.validate().isValid).toBe(false);
     }
 });

@@ -16,12 +16,12 @@ beforeEach(() => {
 });
 
 it("should fail validation if no radio button in the group is checked", () => {
-    const valid: boolean = validator.validate();
-    expect(valid).toBe(false);
+    const valid = validator.validate();
+    expect(valid.isValid).toBe(false);
 });
 
 it("should pass validation if one radio button in the group is checked", () => {
     radio.checked = true;
-    const valid: boolean = validator.validate();
-    expect(valid).toBe(true);
+    const valid = validator.validate();
+    expect(valid.isValid).toBe(true);
 });

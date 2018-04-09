@@ -10,12 +10,12 @@ beforeEach(() => {
 
 it("should fail validation if the textarea is empty", () => {
     const valid = validator.validate();
-    expect(valid).toBe(false);
+    expect(valid.isValid).toBe(false);
 });
 
 it("should pass validator if the textarea has a value", () => {
     textarea.value = "This is a test";
 
     const valid = validator.validate();
-    expect(valid).toBe(true);
+    expect(valid.isValid).toBe(true);
 });
