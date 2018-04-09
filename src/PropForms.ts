@@ -2,6 +2,7 @@ import PropFormsCore from "./classes/PropFormsCore";
 import { PropFormsSettings } from "./types/PropFormsSettings";
 import { PropFormsOptions } from "./types/PropFormsOptions";
 import PropFormsEvent from "./classes/events/model/PropFormsEvent";
+import InvalidEvent from "./classes/events/model/InvalidEvent";
 import PropFormsValidator from "./classes/validation/validators/abstract/PropFormsValidator";
 import PropFormsPopulate from "./classes/populate/PropFormsPopulate";
 
@@ -107,7 +108,7 @@ export default class PropForms {
         return false;
     }
 
-    public on(event: string, fn: (e: PropFormsEvent) => void) {
+    public on<T extends PropFormsEvent>(event: string, fn: (e: T) => void) {
         if (typeof this.core !== "undefined") {
             this.core.events.on(event, fn);
         }
@@ -139,4 +140,4 @@ export default class PropForms {
 }
 
 // Exports for publicly available types
-export { PropFormsEvent, PropFormsValidator, PropFormsOptions };
+export { PropFormsEvent, InvalidEvent, PropFormsValidator, PropFormsOptions };

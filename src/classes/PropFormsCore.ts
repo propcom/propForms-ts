@@ -1,7 +1,5 @@
-import { findElements } from "../utils/utils";
 import PropFormsValidation from "./validation/PropFormsValidation";
 import PropFormsEvents from "./events/PropFormsEvents";
-import { PropFormsOptions } from "../types/PropFormsOptions";
 import PropFormsEvent from "./events/model/PropFormsEvent";
 import { PropFormsSettings } from "../types/PropFormsSettings";
 

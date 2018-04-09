@@ -6,6 +6,8 @@ import { findElements } from "../../utils/utils";
 import PropFormsEvents from "../events/PropFormsEvents";
 import Invalid from "./validators/model/Invalid";
 import Valid from "./validators/model/Valid";
+import InvalidEvent from "../events/model/InvalidEvent";
+import PropFormsEvent from "../events/model/PropFormsEvent";
 
 export default class PropFormsValidation {
     private readonly form: HTMLFormElement;
@@ -32,15 +34,7 @@ export default class PropFormsValidation {
     }
 
     public validate(): boolean {
-        const results: boolean[] = this.validators.map(v => this.process(v));
-
-        if (results.length === 0) {
-            return true;
-        }
-
-        return results.reduce((p, c) => {
-            return p && c;
-        });
+        return this.validateSelected(this.validators);
     }
 
     public validateField(id: string): boolean {
@@ -48,10 +42,13 @@ export default class PropFormsValidation {
             return v.element.id === id;
         });
 
+        return this.validateSelected(validators);
+    }
+
+    private validateSelected(validators: PropFormsValidator<HTMLElement>[]): boolean {
         const results: boolean[] = validators.map(v => this.process(v));
 
         if (results.length === 0) {
-            console.warn(`There was no validator found for ${id}, auto passing`);
             return true;
         }
 
@@ -87,10 +84,12 @@ export default class PropFormsValidation {
     }
 
     private dispatchInvalidEvent(result: Invalid) {
-        console.log(result);
+        const event: InvalidEvent = new InvalidEvent("invalid", result);
+        this.events.dispatch(event);
     }
 
     private dispatchValidEvent(result: Valid) {
-        console.log(result);
+        const event: PropFormsEvent = new PropFormsEvent("valid", result.element);
+        this.events.dispatch(event);
     }
 }

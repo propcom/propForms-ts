@@ -1,6 +1,7 @@
 // This is here just for development, this will not get compiled into the dist folder, only the source in propForms will.
 import PropForms from "./PropForms";
 import PropFormsEvent from "./classes/events/model/PropFormsEvent";
+import InvalidEvent from "./classes/events/model/InvalidEvent";
 
 const form = document.getElementById("form");
 
@@ -49,6 +50,14 @@ if (form && form instanceof HTMLFormElement) {
 
     instance.on("disable", e => {
         console.log("disabled a", e);
+    });
+
+    instance.on("valid", e => {
+        console.log(e);
+    });
+
+    instance.on<InvalidEvent>("invalid", e => {
+        console.log(e);
     });
 
     if (comments) {

@@ -6,6 +6,4 @@ export default class PropFormsEvent {
         this.name = name;
         this.element = element;
     }
-
-    test() {}
 }
