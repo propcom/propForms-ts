@@ -12,34 +12,31 @@ import {
 import { PropFormsSettings } from "../../../../types/PropFormsSettings";
 
 export default class ValidatorFactory {
-    static createValidator(
-        element: HTMLElement,
-        settings: PropFormsSettings
-    ): PropFormsValidator<HTMLElement> {
+    static createValidator(element: HTMLElement): PropFormsValidator<HTMLElement> {
         if (element instanceof HTMLInputElement) {
             switch (element.type) {
                 case "text":
-                    return new InputTextValidator(element, settings);
+                    return new InputTextValidator(element);
                 case "email":
-                    return new EmailValidator(element, settings);
+                    return new EmailValidator(element);
                 case "checkbox":
-                    return new CheckboxValidator(element, settings);
+                    return new CheckboxValidator(element);
                 case "radio":
-                    return new RadioValidator(element, settings);
+                    return new RadioValidator(element);
                 case "file":
-                    return new FileValidator(element, settings);
+                    return new FileValidator(element);
             }
         }
 
         if (element instanceof HTMLTextAreaElement) {
-            return new TextAreaValidator(element, settings);
+            return new TextAreaValidator(element);
         }
 
         if (element instanceof HTMLSelectElement) {
-            return new SelectValidator(element, settings);
+            return new SelectValidator(element);
         }
 
         // Fall back to the InvalidValidator if the element isn't supported
-        return new InvalidValidator(element, settings);
+        return new InvalidValidator(element);
     }
 }

@@ -14,6 +14,11 @@ export default class PropFormsValidation {
         this.fields = fields;
         this.validators = this.createValidators();
 
+        // Done like this so the user doesn't have to pass settings through to their validator, we handle it for them.
+        this.validators.forEach(v => {
+            v.setSettings(this.settings);
+        });
+
         // Turn HTML5 Validation off.
         this.form.setAttribute("novalidate", "true");
     }
@@ -59,7 +64,7 @@ export default class PropFormsValidation {
 
     private createValidators(): PropFormsValidator<HTMLElement>[] {
         const requiredValidators = this.fields.map(field => {
-            return ValidatorFactory.createValidator(field, this.settings);
+            return ValidatorFactory.createValidator(field);
         });
 
         if (typeof this.settings.validators !== "undefined") {
