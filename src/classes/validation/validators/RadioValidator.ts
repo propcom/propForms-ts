@@ -19,6 +19,10 @@ export default class RadioValidator extends PropFormsValidator<HTMLInputElement>
             this.radios.forEach(e => {
                 e.classList.add(this.settings!.errorClass);
             });
+
+            if (typeof this.parent !== "undefined") {
+                this.parent.classList.add(this.settings.errorClass);
+            }
         }
 
         return this.element;
@@ -29,6 +33,10 @@ export default class RadioValidator extends PropFormsValidator<HTMLInputElement>
             this.radios.forEach(e => {
                 e.classList.remove(this.settings!.errorClass);
             });
+
+            if (typeof this.parent !== "undefined") {
+                this.parent.classList.remove(this.settings.errorClass);
+            }
         }
 
         return this.element;
