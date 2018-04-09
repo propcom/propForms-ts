@@ -4,12 +4,4 @@ export default class CheckboxValidator extends PropFormsValidator<HTMLInputEleme
     validate(): boolean {
         return this.element.checked;
     }
-
-    error(): HTMLInputElement {
-        return this.element;
-    }
-
-    pass(): HTMLInputElement {
-        return this.element;
-    }
 }

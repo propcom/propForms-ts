@@ -9,12 +9,4 @@ export default class InvalidValidator extends PropFormsValidator<HTMLElement> {
         );
         return true;
     }
-
-    pass(): HTMLElement {
-        return this.element;
-    }
-
-    error(): HTMLElement {
-        return this.element;
-    }
 }

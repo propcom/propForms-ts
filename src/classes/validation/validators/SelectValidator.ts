@@ -5,12 +5,4 @@ export default class SelectValidator extends PropFormsValidator<HTMLSelectElemen
         console.log("validate select element...");
         return true;
     }
-
-    error(): HTMLSelectElement {
-        return this.element;
-    }
-
-    pass(): HTMLSelectElement {
-        return this.element;
-    }
 }

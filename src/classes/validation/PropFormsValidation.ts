@@ -59,7 +59,7 @@ export default class PropFormsValidation {
 
     private createValidators(): PropFormsValidator<HTMLElement>[] {
         const requiredValidators = this.fields.map(field => {
-            return ValidatorFactory.createValidator(field);
+            return ValidatorFactory.createValidator(field, this.settings);
         });
 
         if (typeof this.settings.validators !== "undefined") {

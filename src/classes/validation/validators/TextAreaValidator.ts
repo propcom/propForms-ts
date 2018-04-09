@@ -4,12 +4,4 @@ export default class TextAreaValidator extends PropFormsValidator<HTMLTextAreaEl
     validate(): boolean {
         return this.element.value.length > 0;
     }
-
-    error(): HTMLTextAreaElement {
-        return this.element;
-    }
-
-    pass(): HTMLTextAreaElement {
-        return this.element;
-    }
 }
