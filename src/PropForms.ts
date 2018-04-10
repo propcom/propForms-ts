@@ -10,10 +10,16 @@ import EventsMap from "./classes/events/EventsMap";
 export default class PropForms {
     private readonly element?: HTMLFormElement;
     private core?: PropFormsCore;
-    private settings: PropFormsSettings = {
+    private defaults: PropFormsSettings = {
         errorClass: "propForms-error",
-        populate: false
+        populate: false,
+        messages: {
+            0: "test",
+            1: "!!!"
+        }
     };
+
+    private settings: PropFormsSettings;
 
     constructor(element: HTMLFormElement | string, options?: PropFormsOptions) {
         if (typeof element === "string") {
@@ -22,7 +28,13 @@ export default class PropForms {
             this.element = element;
         }
 
-        this.settings = { ...this.settings, ...options };
+        this.settings = { ...this.defaults, ...options };
+
+        if (options && options.messages) {
+            this.settings.messages = { ...this.defaults.messages, ...options.messages };
+        }
+
+        console.log(this.settings);
 
         if (typeof this.element === "undefined") {
             console.warn(

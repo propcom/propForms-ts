@@ -7,7 +7,10 @@ const form = document.getElementById("form");
 
 if (form && form instanceof HTMLFormElement) {
     const instance = new PropForms(form, {
-        parent: "tester"
+        parent: "tester",
+        messages: {
+            1: "haahhaha"
+        }
     });
 
     const comments = document.getElementById("comments");
