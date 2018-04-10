@@ -6,12 +6,26 @@ import PropFormsValidator from "./abstract/PropFormsValidator";
 
 export default class TelValidator extends InputTextValidator {
     validate() {
-        const rules: ValidationResult[] = [super.validate(), this.checkTel()];
+        const rules: ValidationResult[] = [
+            super.validate(),
+            this.validateLen(),
+            this.checkTel()
+        ];
         return rules.reduce(PropFormsValidator.reduceResults);
+    }
+
+    private validateLen() {
+        return this.element.value.length > 5
+            ? new Valid(this.element)
+            : this.invalid(3);
     }
 
     private checkTel(): ValidationResult {
         const value: number = parseInt(this.element.value);
-        return !isNaN(value) ? new Valid(this.element) : this.invalid(3);
+        const test = this.element.value.match(/([a-zA-Z]+)/);
+
+        return !isNaN(value) && !test
+            ? new Valid(this.element)
+            : this.invalid(3);
     }
 }
