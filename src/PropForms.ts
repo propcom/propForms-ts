@@ -117,7 +117,7 @@ export default class PropForms {
         }
     }
 
-    public remove(event: string, fn: (e: PropFormsEvent) => void) {
+    public remove<T extends keyof EventsMap>(event: T, fn: (e: EventsMap[T]) => void) {
         if (typeof this.core !== "undefined") {
             this.core.events.remove(event, fn);
         }
