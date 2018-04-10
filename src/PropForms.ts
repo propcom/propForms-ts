@@ -8,10 +8,7 @@ import PropFormsPopulate from "./classes/populate/PropFormsPopulate";
 import EventsMap from "./classes/events/EventsMap";
 
 export default class PropForms {
-    private readonly element?: HTMLFormElement;
-    private core?: PropFormsCore;
-    private settings: PropFormsSettings;
-    private defaults: PropFormsSettings = {
+    static defaults: PropFormsSettings = {
         errorClass: "propForms-error",
         populate: false,
         fileSize: 20,
@@ -27,6 +24,10 @@ export default class PropForms {
         }
     };
 
+    private readonly element?: HTMLFormElement;
+    private core?: PropFormsCore;
+    private settings: PropFormsSettings;
+
     constructor(element: HTMLFormElement | string, options?: PropFormsOptions) {
         if (typeof element === "string") {
             this.element = this.findForm(element);
@@ -34,11 +35,11 @@ export default class PropForms {
             this.element = element;
         }
 
-        this.settings = { ...this.defaults, ...options };
+        this.settings = { ...PropForms.defaults, ...options };
 
         if (options && options.messages) {
             this.settings.messages = {
-                ...this.defaults.messages,
+                ...PropForms.defaults.messages,
                 ...options.messages
             };
         }
