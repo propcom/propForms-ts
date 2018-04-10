@@ -56,7 +56,7 @@ if (form && form instanceof HTMLFormElement) {
         console.log(e);
     });
 
-    instance.on<InvalidEvent>("invalid", e => {
+    instance.on("invalid", e => {
         console.log(e);
     });
 

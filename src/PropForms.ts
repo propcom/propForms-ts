@@ -5,6 +5,7 @@ import PropFormsEvent from "./classes/events/model/PropFormsEvent";
 import InvalidEvent from "./classes/events/model/InvalidEvent";
 import PropFormsValidator from "./classes/validation/validators/abstract/PropFormsValidator";
 import PropFormsPopulate from "./classes/populate/PropFormsPopulate";
+import EventsMap from "./classes/events/EventsMap";
 
 export default class PropForms {
     private readonly element?: HTMLFormElement;
@@ -110,7 +111,7 @@ export default class PropForms {
         return false;
     }
 
-    public on<T extends PropFormsEvent>(event: string, fn: (e: T) => void) {
+    public on<T extends keyof EventsMap>(event: T, fn: (e: EventsMap[T]) => void) {
         if (typeof this.core !== "undefined") {
             this.core.events.on(event, fn);
         }
