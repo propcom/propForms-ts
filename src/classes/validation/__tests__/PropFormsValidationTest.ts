@@ -10,6 +10,8 @@ beforeEach(() => {
     document.body.innerHTML = `<form id="form">
             <input type="text" id="text" required>
             <input type="email" id="email" required>
+            <input type="radio" name="test" value="1">
+            <input type="radio" name="test" value="2">
         </form>`;
 
     form = document.getElementById("form") as HTMLFormElement;
@@ -24,9 +26,11 @@ it("should not pass validation", () => {
 it("should pass validation", () => {
     const email = document.getElementById("email") as HTMLInputElement;
     const text = document.getElementById("text") as HTMLInputElement;
+    const radio = document.querySelector("*[name=test]") as HTMLInputElement;
 
     email.value = "test@test.com";
     text.value = "hello";
+    radio.value = "1";
 
     const result = validation.validate();
 
