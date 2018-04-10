@@ -12,8 +12,6 @@ export default class EmailValidator extends InputTextValidator {
 
     validateEmail(): ValidationResult {
         const regEx = /^([^.][^\s\\@]+[^.])@(([0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,}|[0-9]{1,3})$/;
-        return regEx.test(this.element.value)
-            ? new Valid(this.element)
-            : new Invalid(this.element, 1, "Please enter a valid email address");
+        return regEx.test(this.element.value) ? new Valid(this.element) : this.invalid(1);
     }
 }

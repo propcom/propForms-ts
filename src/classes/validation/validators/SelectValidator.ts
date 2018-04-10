@@ -8,8 +8,6 @@ export default class SelectValidator extends PropFormsValidator<HTMLSelectElemen
         const index: number = this.element.selectedIndex;
         const option: HTMLOptionElement = this.element.options.item(index);
 
-        return !option.hasAttribute("data-invalid")
-            ? new Valid(this.element)
-            : new Invalid(this.element, 1, "Please select a valid option");
+        return !option.hasAttribute("data-invalid") ? new Valid(this.element) : this.invalid(5);
     }
 }

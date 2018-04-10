@@ -9,8 +9,6 @@ export default class InputTextValidator extends PropFormsValidator<HTMLInputElem
     }
 
     protected validateLength(): ValidationResult {
-        return this.element.value.length > 0
-            ? new Valid(this.element)
-            : new Invalid(this.element, 1, "Please enter a value");
+        return this.element.value.length > 0 ? new Valid(this.element) : this.invalid(0);
     }
 }

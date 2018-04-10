@@ -12,8 +12,6 @@ export default class TelValidator extends InputTextValidator {
 
     private checkTel(): ValidationResult {
         const value: number = parseInt(this.element.value);
-        return !isNaN(value)
-            ? new Valid(this.element)
-            : new Invalid(this.element, 1, "Please enter a valid phone number");
+        return !isNaN(value) ? new Valid(this.element) : this.invalid(3);
     }
 }

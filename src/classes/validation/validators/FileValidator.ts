@@ -5,9 +5,7 @@ import ValidationResult from "./model/ValidationResult";
 
 export default class FileValidator extends PropFormsValidator<HTMLInputElement> {
     validate(): ValidationResult {
-        return this.element.checked
-            ? new Valid(this.element)
-            : new Invalid(this.element, 1, "Invalid File");
+        return this.element.checked ? new Valid(this.element) : this.invalid(6);
     }
 
     error(): HTMLInputElement {

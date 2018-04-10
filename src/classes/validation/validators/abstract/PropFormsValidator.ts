@@ -57,4 +57,12 @@ export default abstract class PropFormsValidator<T extends HTMLElement> {
 
         return this.element;
     }
+
+    protected invalid(code: number): Invalid {
+        if (typeof this.settings !== "undefined") {
+            return new Invalid(this.element, code, this.settings.messages[code]);
+        }
+
+        return new Invalid(this.element, code, "Please enter a valid value");
+    }
 }

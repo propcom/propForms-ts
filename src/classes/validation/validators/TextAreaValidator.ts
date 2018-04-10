@@ -5,8 +5,6 @@ import ValidationResult from "./model/ValidationResult";
 
 export default class TextAreaValidator extends PropFormsValidator<HTMLTextAreaElement> {
     validate(): ValidationResult {
-        return this.element.value.trim().length > 0
-            ? new Valid(this.element)
-            : new Invalid(this.element, 1, "Please enter a valid value");
+        return this.element.value.trim().length > 0 ? new Valid(this.element) : this.invalid(0);
     }
 }
