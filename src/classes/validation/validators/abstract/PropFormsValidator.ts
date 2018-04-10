@@ -1,7 +1,6 @@
 import { PropFormsSettings } from "../../../../types/PropFormsSettings";
 import { findParent } from "../../../../utils/utils";
 import ValidationResult from "../model/ValidationResult";
-import Valid from "../model/Valid";
 import Invalid from "../model/Invalid";
 
 export default abstract class PropFormsValidator<T extends HTMLElement> {
@@ -10,7 +9,10 @@ export default abstract class PropFormsValidator<T extends HTMLElement> {
     protected settings?: PropFormsSettings;
     protected parent?: HTMLElement;
 
-    static reduceResults(p: ValidationResult, c: ValidationResult): ValidationResult {
+    static reduceResults(
+        p: ValidationResult,
+        c: ValidationResult
+    ): ValidationResult {
         if (c instanceof Invalid) {
             return c;
         } else if (p instanceof Invalid) {
@@ -58,9 +60,14 @@ export default abstract class PropFormsValidator<T extends HTMLElement> {
         return this.element;
     }
 
-    protected invalid(code: number): Invalid {
+    protected invalid(code: number, args?: string): Invalid {
         if (typeof this.settings !== "undefined") {
-            return new Invalid(this.element, code, this.settings.messages[code]);
+            const message: string =
+                typeof args === "undefined"
+                    ? this.settings.messages[code]
+                    : this.settings.messages[code].replace(/%s/g, args);
+
+            return new Invalid(this.element, code, message);
         }
 
         return new Invalid(this.element, code, "Please enter a valid value");

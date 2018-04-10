@@ -1,7 +1,6 @@
 // This is here just for development, this will not get compiled into the dist folder, only the source in propForms will.
 import PropForms from "./PropForms";
 import PropFormsEvent from "./classes/events/model/PropFormsEvent";
-import InvalidEvent from "./classes/events/model/InvalidEvent";
 
 const form = document.getElementById("form");
 

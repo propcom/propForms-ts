@@ -6,6 +6,7 @@ export type PropFormsOptions = {
     parent?: string;
     populate?: boolean;
     errorClass?: string;
+    fileSize?: number;
     messages?: { [n: number]: string };
     validators?: PropFormsValidator<HTMLElement>[];
 };

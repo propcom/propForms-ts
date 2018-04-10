@@ -14,6 +14,7 @@ export default class PropForms {
     private defaults: PropFormsSettings = {
         errorClass: "propForms-error",
         populate: false,
+        fileSize: 20,
         messages: {
             0: "Please enter a value",
             1: "Please enter a valid email address",
@@ -21,7 +22,8 @@ export default class PropForms {
             3: "Please enter a valid phone number",
             4: "Please choose an option",
             5: "Please select an option",
-            6: "Please choose a valid file"
+            6: "Please select a file",
+            7: "%s is too large, please choose a smaller file"
         }
     };
 
@@ -35,7 +37,10 @@ export default class PropForms {
         this.settings = { ...this.defaults, ...options };
 
         if (options && options.messages) {
-            this.settings.messages = { ...this.defaults.messages, ...options.messages };
+            this.settings.messages = {
+                ...this.defaults.messages,
+                ...options.messages
+            };
         }
 
         if (typeof this.element === "undefined") {
@@ -125,13 +130,19 @@ export default class PropForms {
         return false;
     }
 
-    public on<T extends keyof EventsMap>(event: T, fn: (e: EventsMap[T]) => void) {
+    public on<T extends keyof EventsMap>(
+        event: T,
+        fn: (e: EventsMap[T]) => void
+    ) {
         if (typeof this.core !== "undefined") {
             this.core.events.on(event, fn);
         }
     }
 
-    public remove<T extends keyof EventsMap>(event: T, fn: (e: EventsMap[T]) => void) {
+    public remove<T extends keyof EventsMap>(
+        event: T,
+        fn: (e: EventsMap[T]) => void
+    ) {
         if (typeof this.core !== "undefined") {
             this.core.events.remove(event, fn);
         }
