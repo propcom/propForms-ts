@@ -10,7 +10,7 @@ beforeEach(() => {
     document.body.innerHTML = `<form id="form">
             <input type="text" id="text" required>
             <input type="email" id="email" required>
-            <input type="radio" name="test" value="1">
+            <input type="radio" name="test" value="1" required>
             <input type="radio" name="test" value="2">
         </form>`;
 
@@ -30,7 +30,7 @@ it("should pass validation", () => {
 
     email.value = "test@test.com";
     text.value = "hello";
-    radio.value = "1";
+    radio.checked = true;
 
     const result = validation.validate();
 
@@ -38,13 +38,13 @@ it("should pass validation", () => {
 });
 
 it("should create a validator for each required field", () => {
-    expect(validation.requiredFields.length).toBe(2);
+    expect(validation.requiredFields.length).toBe(3);
 });
 
 it("should dispatch an event for each required field", () => {
     const spy = spyOn(events, "dispatch");
     validation.validate();
-    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenCalledTimes(3);
 });
 
 it("should only validate the one field", () => {
