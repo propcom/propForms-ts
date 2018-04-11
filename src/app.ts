@@ -4,6 +4,8 @@ import PropFormsEvent from "./classes/events/model/PropFormsEvent";
 
 const form = document.getElementById("form");
 
+const test: PropForms = new PropForms("test");
+
 if (form && form instanceof HTMLFormElement) {
     const instance = new PropForms(form, {
         parent: "tester"

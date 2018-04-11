@@ -29,11 +29,10 @@ export default class PropForms {
     private settings: PropFormsSettings;
 
     constructor(element: HTMLFormElement | string, options?: PropFormsOptions) {
-        if (typeof element === "string") {
-            this.element = this.findForm(element);
-        } else {
-            this.element = element;
-        }
+        this.element =
+            typeof element === "string"
+                ? this.findForm(element)
+                : (this.element = element);
 
         this.settings = { ...PropForms.defaults, ...options };
 
@@ -65,88 +64,67 @@ export default class PropForms {
         return undefined;
     }
 
+    private isRunning(): boolean {
+        return typeof this.core !== "undefined";
+    }
+
     public getForm(): HTMLFormElement | undefined {
         return this.element;
     }
 
     public isDisabled(): boolean {
-        if (typeof this.core !== "undefined") {
-            return this.core.isDisabled;
-        }
-
-        return false;
+        return this.isRunning() && this.core!.isDisabled;
     }
 
     public disable() {
-        if (typeof this.core !== "undefined") {
-            this.core.disable();
-        }
+        return this.isRunning() && this.core!.disable();
     }
 
     public enable() {
-        if (typeof this.core !== "undefined") {
-            this.core.enable();
-        }
+        return this.isRunning() && this.core!.enable();
     }
 
     public submit() {
-        if (typeof this.core !== "undefined") {
-            this.core.submit();
-        }
+        return this.isRunning() && this.core!.submit();
     }
 
     public unbindSubmit() {
-        if (typeof this.core !== "undefined") {
-            this.core.unbindSubmit();
-        }
+        return this.isRunning() && this.core!.unbindSubmit();
     }
 
     public bindSubmit() {
-        if (typeof this.core !== "undefined") {
-            this.core.bindSubmit();
-        }
+        return this.isRunning() && this.core!.bindSubmit();
     }
 
     public getRequiredFields(): HTMLElement[] {
-        if (typeof this.core !== "undefined") {
-            return this.core.getRequiredFields();
-        }
-
-        return [];
+        return this.isRunning() ? this.core!.getRequiredFields() : [];
     }
 
     public validate(): boolean {
-        if (typeof this.core !== "undefined") {
-            return this.core.validator.validate();
-        }
-
-        return false;
+        return (
+            typeof this.core !== "undefined" && this.core.validator.validate()
+        );
     }
 
     public validateField(id: string): boolean {
-        if (typeof this.core !== "undefined") {
-            return this.core.validator.validateField(id);
-        }
-
-        return false;
+        return (
+            typeof this.core !== "undefined" &&
+            this.core.validator.validateField(id)
+        );
     }
 
     public on<T extends keyof EventsMap>(
         event: T,
         fn: (e: EventsMap[T]) => void
     ) {
-        if (typeof this.core !== "undefined") {
-            this.core.events.on(event, fn);
-        }
+        return this.isRunning() && this.core!.events.on(event, fn);
     }
 
     public remove<T extends keyof EventsMap>(
         event: T,
         fn: (e: EventsMap[T]) => void
     ) {
-        if (typeof this.core !== "undefined") {
-            this.core.events.remove(event, fn);
-        }
+        return this.isRunning() && this.core!.events.remove(event, fn);
     }
 
     public populate() {
