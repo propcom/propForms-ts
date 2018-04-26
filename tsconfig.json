@@ -1,8 +1,9 @@
 {
     "compilerOptions": {
         "noImplicitAny": true,
-        "module": "es6",
+        "module": "commonjs",
         "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
         "target": "es5",
         "allowJs": false,
         "experimentalDecorators": true,
@@ -16,7 +17,17 @@
         "removeComments": true,
         "allowUnusedLabels": false,
         "noImplicitReturns": true,
-        "strictPropertyInitialization": true
+        "strictPropertyInitialization": true,
+        "outDir": "dist",
+        "declaration": true,
+        "declarationDir": "dist"
     },
-    "exclude": ["node_modules", "**/__tests__", "src/app.ts", "dist", "TestUtils.ts"]
+    "files": ["src/PropForms.ts"],
+    "exclude": [
+        "node_modules",
+        "**/__tests__",
+        "src/app.ts",
+        "dist",
+        "TestUtils.ts"
+    ]
 }

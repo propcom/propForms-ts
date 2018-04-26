@@ -1,21 +1,26 @@
 import PropFormsValidator from "./abstract/PropFormsValidator";
 import { queryElements } from "../../../utils/utils";
-import Invalid from "./model/Invalid";
 import Valid from "./model/Valid";
 import ValidationResult from "./model/ValidationResult";
 
-export default class RadioValidator extends PropFormsValidator<HTMLInputElement> {
+export default class RadioValidator extends PropFormsValidator<
+    HTMLInputElement
+> {
     private radios: HTMLInputElement[];
 
     constructor(element: HTMLInputElement) {
         super(element);
-        this.radios = queryElements<HTMLInputElement>(`*[name=${element.name}]`);
+        this.radios = queryElements<HTMLInputElement>(
+            `*[name=${element.name}]`
+        );
     }
 
     validate(): ValidationResult {
         const rules: boolean[] = this.radios.map(this.checkValue);
 
-        return rules.indexOf(true) >= 0 ? new Valid(this.element) : this.invalid(4);
+        return rules.indexOf(true) >= 0
+            ? new Valid(this.element)
+            : this.invalid(4);
     }
 
     error(): HTMLInputElement {
